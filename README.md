@@ -40,9 +40,11 @@ Save users' rules in Resource folder for next using time.
 ##### -rules view
 Show the current rules
 ##### -rules list
-Show the list of available rules in Resource folder.
+Show the list of exist rules in Resource folder.
 ##### -rules [rulesFileName.txt]
-Set rules in identified file.  
+Set rules in identified file.
+##### -dict list
+Show the list of exist dictionaries in Resource folder.
 
 ## Solution Design
 
