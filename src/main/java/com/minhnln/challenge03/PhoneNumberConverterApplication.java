@@ -1,11 +1,14 @@
 package com.minhnln.challenge03;
 
+import java.io.File;
 import java.io.PrintStream;
+import java.net.URL;
+import java.net.URLClassLoader;
 
 public class PhoneNumberConverterApplication {
 
     private enum COMMAND {
-        CREATE_NEW_RULE("-rules [digit] [letter1] [letter2] ... "),
+        CREATE_NEW_RULE("-rules [digit] [letter1] [letter2] ..."),
         CREATE_DEFAULT_RULE("-rules default"),
         SET_RULES("-rules [rulesFileName.txt]"),
         VERIFY_RULES("-rules verify"),
@@ -32,7 +35,7 @@ public class PhoneNumberConverterApplication {
         printInstruction();
     }
 
-    private static void printInstruction() {
+    public static void printInstruction() {
         final PrintStream out = System.out;
 
         out.println("===================== PHONE NUMBER CONVERTER - CODING CHALLENGE ======================");
@@ -46,9 +49,14 @@ public class PhoneNumberConverterApplication {
         out.println("If you want to list all the commands, type -help");
     }
 
-    private static void showCommandList() {
+    public static void showCommandList() {
+        final PrintStream out = System.out;
+
+        out.println("Rules commands:");
         showRulesCommand();
+        out.println("Dictionary commands:");
         showDictionaryCommand();
+        out.println("Execute commands:");
         showExecuteCommand();
     }
 
@@ -76,7 +84,7 @@ public class PhoneNumberConverterApplication {
     private static void showExecuteCommand() {
         final PrintStream out = System.out;
 
-        out.println("\tConvert single phone number:     " + COMMAND.CONVERT_SINGLE_PHONE_NUMBER);
-        out.println("\tConvert multiple phone number:   " + COMMAND.CONVERT_MULTIPLE_PHONE_NUMBER);
+        out.println("\tConvert single phone number:   " + COMMAND.CONVERT_SINGLE_PHONE_NUMBER);
+        out.println("\tConvert multiple phone number: " + COMMAND.CONVERT_MULTIPLE_PHONE_NUMBER);
     }
 }

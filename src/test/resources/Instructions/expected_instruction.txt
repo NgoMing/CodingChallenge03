@@ -1,0 +1,18 @@
+===================== PHONE NUMBER CONVERTER - CODING CHALLENGE ======================
+
+Step 1: create rules
+	Create default rules:               -rules default
+	Set rules in exist file:            -rules [rulesFileName.txt]
+	Create a new rule:                  -rules [digit] [letter1] [letter2] ...
+	Save rules in file(Optional):       -rules save [ruleFileName.txt]
+	Verify current rules(Optional):     -rules verify
+	Show current rules(Optional):       -rules view
+	Show list of exist rules(Optional): -rules list
+Step 2: set dictionary
+	Set default dictionary:                    -dict default
+	Set dictionary:                            -dict [dictionaryFileName.txt]
+	Show list of exist dictionaries(Optional): -dict list
+Step 3: convert single or multiple phone numbers
+	Convert single phone number:   -pnum [phone_number]
+	Convert multiple phone number: -file {phone_number_file_name]
+If you want to list all the commands, type -help
