@@ -4,6 +4,11 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+/**
+ * StringAsker class
+ *
+ * support simulate for input and output in console
+ */
 public class StringAsker {
     private final Scanner scanner;
     private final PrintStream out;

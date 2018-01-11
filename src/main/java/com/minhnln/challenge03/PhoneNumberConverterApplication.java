@@ -6,9 +6,14 @@ import com.minhnln.challenge03.utils.StringAsker;
 
 import java.io.PrintStream;
 
-
+/**
+ * The application of Phone Number Converter
+ */
 public class PhoneNumberConverterApplication {
 
+    /**
+     * enum for user commands
+     */
     private enum COMMAND {
         CREATE_NEW_RULE("-rules [digit] [letter1] [letter2] ..."),
         CREATE_DEFAULT_RULE("-rules default"),
@@ -35,10 +40,22 @@ public class PhoneNumberConverterApplication {
         }
     }
 
+
+    /**
+     * main method
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         execute(new StringAsker(System.in, System.out));
     }
 
+    /**
+     * execute method
+     * support simulate input and output in console
+     *
+     * @param asker
+     */
     public static void execute(StringAsker asker) {
         PhoneNumberConverter phoneNumberConverter = new PhoneNumberConverter();
         ConsoleSignal consoleSignal = new ConsoleSignal();
@@ -57,6 +74,9 @@ public class PhoneNumberConverterApplication {
         }
     }
 
+    /**
+     * print the instruction of program
+     */
     public static void printInstruction() {
         final PrintStream out = System.out;
 
@@ -72,6 +92,9 @@ public class PhoneNumberConverterApplication {
         out.println("If you want to quit the program, type " + COMMAND.QUIT);
     }
 
+    /**
+     * print the list of supported commands
+     */
     public static void showCommandList() {
         final PrintStream out = System.out;
 
@@ -83,6 +106,9 @@ public class PhoneNumberConverterApplication {
         showExecuteCommand();
     }
 
+    /**
+     * print the list of commands related to rules configuration
+     */
     private static void showRulesCommand() {
         final PrintStream out = System.out;
 
@@ -95,6 +121,9 @@ public class PhoneNumberConverterApplication {
         out.println("\tShow list of exist rules(Optional): " + COMMAND.SHOW_LIST_EXIST_RULES);
     }
 
+    /**
+     * print the list of commands related to dictionary configuration
+     */
     private static void showDictionaryCommand() {
         final PrintStream out = System.out;
 
@@ -103,7 +132,9 @@ public class PhoneNumberConverterApplication {
         out.println("\tShow list of exist dictionaries(Optional): " + COMMAND.SHOW_LIST_EXIST_DICTIONARIES);
     }
 
-
+    /**
+     * print the list of execute commands
+     */
     private static void showExecuteCommand() {
         final PrintStream out = System.out;
 

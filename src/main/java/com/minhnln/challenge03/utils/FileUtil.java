@@ -6,6 +6,11 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 
+/**
+ * FileUtil class
+ *
+ * support read content of file in resource folder
+ */
 public class FileUtil {
 
     public String getContentFromClasspath(final String fileName) {
