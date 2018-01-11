@@ -1,7 +1,6 @@
 package com.minhnln.challenge03;
 
 import com.minhnln.challenge03.commands.receiver.rules.WordToNumberRules;
-import com.minhnln.challenge03.model.PhoneNumberConverter;
 import com.minhnln.challenge03.utils.ConsoleSignal;
 import com.minhnln.challenge03.utils.FileUtil;
 import com.minhnln.challenge03.utils.StringAsker;
@@ -11,6 +10,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.FixMethodOrder;
+import org.junit.runners.MethodSorters;
 
 import java.io.*;
 
@@ -19,6 +20,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @RunWith(JUnitParamsRunner.class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PhoneNumberConverterApplicationTest {
 
     private static final String CHARSET_NAME = "UTF-8";
@@ -106,7 +108,7 @@ public class PhoneNumberConverterApplicationTest {
     }
 
     @Test
-    public void viewWithoutCreatingRules() throws Exception {
+    public void _viewWithoutCreatingRules() throws Exception {
         when(asker.ask(consoleSignal.execute())).thenReturn("-rules view");
         when(asker.ask(consoleSignal.execute())).thenReturn("-quit");
         PhoneNumberConverterApplication.execute(asker);
