@@ -11,5 +11,5 @@ Dictionary commands:
 	Set dictionary:                            -dict [dictionaryFileName.txt]
 	Show list of exist dictionaries(Optional): -dict list
 Execute commands:
-	Convert single phone number:   -pnum [phone_number]
-	Convert multiple phone number: -file {phone_number_file_name]
+	Convert single phone number:   -exe [phone_number]
+	Convert multiple phone number: -exe [phone_number_file_name]

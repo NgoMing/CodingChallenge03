@@ -52,4 +52,18 @@ public class PhoneNumberConverterApplicationTest {
                 new FileUtil().getContentFromClasspath("Instructions/expected_show_command_list.txt")
         );
     }
+
+    @Test
+    public void createDefaultRules() throws Exception {
+        ConsoleSignal consoleSignal = new ConsoleSignal();
+        when(asker.ask(consoleSignal.execute())).thenReturn("-rules default");
+        when(asker.ask(consoleSignal.execute())).thenReturn("-rules view");
+        when(asker.ask(consoleSignal.execute())).thenReturn("-quit");
+        PhoneNumberConverterApplication.execute(asker);
+
+        final String outContentString = outContent.toString(CHARSET_NAME);
+        assertThat(outContentString).contains(
+                new FileUtil().getContentFromClasspath("Commands/default_rules.txt")
+        );
+    }
 }

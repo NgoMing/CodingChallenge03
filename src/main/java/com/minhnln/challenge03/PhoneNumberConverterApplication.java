@@ -1,32 +1,39 @@
 package com.minhnln.challenge03;
 
+import com.minhnln.challenge03.cli.CommandLineParser;
+import com.minhnln.challenge03.commands.UserCommand;
 import com.minhnln.challenge03.model.PhoneNumberConverter;
 import com.minhnln.challenge03.utils.ConsoleSignal;
 import com.minhnln.challenge03.utils.StringAsker;
 
 import java.io.PrintStream;
+import java.util.Arrays;
 
 /**
  * The application of Phone Number Converter
  */
 public class PhoneNumberConverterApplication {
 
+    public static final String RULE_CMD = "-rules";
+    public static final String DICTIONARY_CMD = "-dict";
+    public static final String EXECUTE_CMD = "-exe";
+
     /**
      * enum for user commands
      */
     private enum COMMAND {
-        CREATE_NEW_RULE("-rules [digit] [letter1] [letter2] ..."),
-        CREATE_DEFAULT_RULE("-rules default"),
-        SET_RULES("-rules [rulesFileName.txt]"),
-        VERIFY_RULES("-rules verify"),
-        SAVE_RULES("-rules save [ruleFileName.txt]"),
-        SHOW_CURRENT_RULES("-rules view"),
-        SHOW_LIST_EXIST_RULES("-rules list"),
-        SET_DEFAULT_DICTIONARY("-dict default"),
-        SET_DICTIONARY("-dict [dictionaryFileName.txt]"),
-        SHOW_LIST_EXIST_DICTIONARIES("-dict list"),
-        CONVERT_SINGLE_PHONE_NUMBER("-pnum [phone_number]"),
-        CONVERT_MULTIPLE_PHONE_NUMBER("-file {phone_number_file_name]"),
+        CREATE_NEW_RULE(RULE_CMD + " [digit] [letter1] [letter2] ..."),
+        CREATE_DEFAULT_RULE(RULE_CMD + " default"),
+        SET_RULES(RULE_CMD + " [rulesFileName.txt]"),
+        VERIFY_RULES(RULE_CMD + " verify"),
+        SAVE_RULES(RULE_CMD + " save [ruleFileName.txt]"),
+        SHOW_CURRENT_RULES(RULE_CMD + " view"),
+        SHOW_LIST_EXIST_RULES(RULE_CMD + " list"),
+        SET_DEFAULT_DICTIONARY(DICTIONARY_CMD + " default"),
+        SET_DICTIONARY(DICTIONARY_CMD + " [dictionaryFileName.txt]"),
+        SHOW_LIST_EXIST_DICTIONARIES(DICTIONARY_CMD + " list"),
+        CONVERT_SINGLE_PHONE_NUMBER(EXECUTE_CMD + " [phone_number]"),
+        CONVERT_MULTIPLE_PHONE_NUMBER(EXECUTE_CMD + " [phone_number_file_name]"),
         HELP("-help"),
         QUIT("-quit");
 
@@ -59,17 +66,28 @@ public class PhoneNumberConverterApplication {
     public static void execute(StringAsker asker) {
         PhoneNumberConverter phoneNumberConverter = new PhoneNumberConverter();
         ConsoleSignal consoleSignal = new ConsoleSignal();
+        UserCommand userCommand = new UserCommand();
         boolean done = false;
 
         String commandLine = asker.ask(consoleSignal.execute());
 
         while(!done) {
-            if (commandLine.contains(COMMAND.HELP.toString())) {
+            // -help
+            if (commandLine.equals(COMMAND.HELP.toString())) {
                 showCommandList();
                 commandLine = asker.ask(consoleSignal.execute());
             }
-            else if (commandLine.contains(COMMAND.QUIT.toString())) {
+
+            // quit command
+            else if (commandLine.equals(COMMAND.QUIT.toString())) {
                 done = true;
+            }
+
+            // others commands
+            else {
+                userCommand.setCommand(CommandLineParser.parse(commandLine));
+                userCommand.execute();
+                commandLine = asker.ask(consoleSignal.execute());
             }
         }
     }

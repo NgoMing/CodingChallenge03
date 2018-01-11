@@ -1,0 +1,8 @@
+Digit 2: A, B, C
+Digit 3: D, E, F
+Digit 4: G, H, I
+Digit 5: J, K, L
+Digit 6: M, N, O
+Digit 7: P, Q, R, S
+Digit 8: T, U, V
+Digit 9: W, X, Y, Z
