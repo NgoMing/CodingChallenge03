@@ -1,9 +1,11 @@
 package com.minhnln.challenge03;
 
-import java.io.File;
+import com.minhnln.challenge03.model.PhoneNumberConverter;
+import com.minhnln.challenge03.utils.ConsoleSignal;
+import com.minhnln.challenge03.utils.StringAsker;
+
 import java.io.PrintStream;
-import java.net.URL;
-import java.net.URLClassLoader;
+
 
 public class PhoneNumberConverterApplication {
 
@@ -19,7 +21,9 @@ public class PhoneNumberConverterApplication {
         SET_DICTIONARY("-dict [dictionaryFileName.txt]"),
         SHOW_LIST_EXIST_DICTIONARIES("-dict list"),
         CONVERT_SINGLE_PHONE_NUMBER("-pnum [phone_number]"),
-        CONVERT_MULTIPLE_PHONE_NUMBER("-file {phone_number_file_name]");
+        CONVERT_MULTIPLE_PHONE_NUMBER("-file {phone_number_file_name]"),
+        HELP("-help"),
+        QUIT("-quit");
 
         private String content;
 
@@ -32,7 +36,25 @@ public class PhoneNumberConverterApplication {
     }
 
     public static void main(String[] args) {
-        printInstruction();
+        execute(new StringAsker(System.in, System.out));
+    }
+
+    public static void execute(StringAsker asker) {
+        PhoneNumberConverter phoneNumberConverter = new PhoneNumberConverter();
+        ConsoleSignal consoleSignal = new ConsoleSignal();
+        boolean done = false;
+
+        String commandLine = asker.ask(consoleSignal.execute());
+
+        while(!done) {
+            if (commandLine.contains(COMMAND.HELP.toString())) {
+                showCommandList();
+                commandLine = asker.ask(consoleSignal.execute());
+            }
+            else if (commandLine.contains(COMMAND.QUIT.toString())) {
+                done = true;
+            }
+        }
     }
 
     public static void printInstruction() {
@@ -46,7 +68,8 @@ public class PhoneNumberConverterApplication {
         showDictionaryCommand();
         out.println("Step 3: convert single or multiple phone numbers");
         showExecuteCommand();
-        out.println("If you want to list all the commands, type -help");
+        out.println("If you want to list all the commands, type " + COMMAND.HELP);
+        out.println("If you want to quit the program, type " + COMMAND.QUIT);
     }
 
     public static void showCommandList() {

@@ -12,6 +12,7 @@ repositories {
 dependencies {
     testCompile(
             group: 'junit', name: 'junit', version: '4.12',
-            "org.assertj:assertj-core:3.8.0"
+            "org.assertj:assertj-core:3.8.0",
+            "org.mockito:mockito-core:1.+"
     )
 }
