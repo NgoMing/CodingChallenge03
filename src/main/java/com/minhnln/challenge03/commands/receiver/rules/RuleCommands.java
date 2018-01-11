@@ -31,6 +31,9 @@ public class RuleCommands {
     }
 
     public void view() {
+        if ((null == wordToNumberRules) || (wordToNumberRules.isEmpty())){
+            throw new NullPointerException("Rules has not set up yet");
+        }
         System.out.println(wordToNumberRules);
     }
 

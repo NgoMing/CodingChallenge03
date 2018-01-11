@@ -106,6 +106,18 @@ public class PhoneNumberConverterApplicationTest {
     }
 
     @Test
+    public void viewWithoutCreatingRules() throws Exception {
+        when(asker.ask(consoleSignal.execute())).thenReturn("-rules view");
+        when(asker.ask(consoleSignal.execute())).thenReturn("-quit");
+        PhoneNumberConverterApplication.execute(asker);
+
+        final String outContentString = outContent.toString(CHARSET_NAME);
+        assertThat(outContentString).contains(
+                new FileUtil().getContentFromClasspath("Commands/error_view_without_creating_rules.txt")
+        );
+    }
+
+    @Test
     public void createRulesInFile() throws Exception {
         String fileName = "rules.txt";
         when(asker.ask(consoleSignal.execute())).thenReturn("-rules " + fileName);

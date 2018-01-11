@@ -22,6 +22,10 @@ public class WordToNumberRules {
         dictionaryMap = new HashMap<>();
     }
 
+    public boolean isEmpty() {
+        return dictionaryMap.isEmpty();
+    }
+
     public static WordToNumberRules getInstance() {
         if (uniqueWordToNumberRules == null) {
             uniqueWordToNumberRules = new WordToNumberRules();

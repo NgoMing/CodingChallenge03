@@ -96,7 +96,15 @@ public class PhoneNumberConverterApplication {
                     commandLine = asker.ask(consoleSignal.execute());
                     continue;
                 }
-                userCommand.execute();
+
+                try {
+                    userCommand.execute();
+                }
+                catch (NullPointerException npe) {
+                    System.out.println(npe);
+                    showRulesCommand();
+                }
+
                 commandLine = asker.ask(consoleSignal.execute());
             }
         }
