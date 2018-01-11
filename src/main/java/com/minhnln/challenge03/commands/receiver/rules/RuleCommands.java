@@ -1,18 +1,25 @@
-package com.minhnln.challenge03.commands.rules;
+package com.minhnln.challenge03.commands.receiver.rules;
 
 public class RuleCommands {
 
     private WordToNumberRules wordToNumberRules;
     private String number;
     private String[] digits;
+    private String fileName;
 
     public RuleCommands() {
         wordToNumberRules = WordToNumberRules.getInstance();
     }
 
     public RuleCommands(String number, String[] digits) {
+        wordToNumberRules = WordToNumberRules.getInstance();
         this.number = number;
         this.digits = digits;
+    }
+
+    public RuleCommands(String fileName) {
+        wordToNumberRules = WordToNumberRules.getInstance();
+        this.fileName = fileName;
     }
 
     public void createDefault() {
@@ -25,5 +32,21 @@ public class RuleCommands {
 
     public void view() {
         System.out.println(wordToNumberRules);
+    }
+
+    public void setInFile() {
+        wordToNumberRules.createInFile(fileName);
+    }
+
+    public void save() {
+        wordToNumberRules.save(fileName);
+    }
+
+    public void verify() {
+        wordToNumberRules.verify();
+    }
+
+    public void list() {
+        wordToNumberRules.list();
     }
 }

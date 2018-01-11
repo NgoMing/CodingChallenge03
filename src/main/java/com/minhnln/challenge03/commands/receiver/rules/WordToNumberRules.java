@@ -1,10 +1,19 @@
-package com.minhnln.challenge03.commands.rules;
+package com.minhnln.challenge03.commands.receiver.rules;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class WordToNumberRules {
+    /**
+     * Static string for test incomplete methods
+     */
+    public static final String CREATE_IN_FILE = "Create rules in file ";
+    public static final String SAVE_IN_FILE = "Save rules in file ";
+    public static final String VERIFY_RULES = "Verify rules";
+    public static final String LIST_RULES = "List all the existing rules:";
+
+
     private static WordToNumberRules uniqueWordToNumberRules;
 
     Map<String, ArrayList<String>> dictionaryMap;
@@ -64,5 +73,21 @@ public class WordToNumberRules {
         }
         sb.setLength(sb.length() - 1);
         return sb.toString();
+    }
+
+    public void createInFile(String fileName) {
+        System.out.println(CREATE_IN_FILE + fileName);
+    }
+
+    public void save(String fileName) {
+        System.out.println(SAVE_IN_FILE + fileName);
+    }
+
+    public void verify() {
+        System.out.println(VERIFY_RULES);
+    }
+
+    public void list() {
+        System.out.println(LIST_RULES);
     }
 }

@@ -1,6 +1,7 @@
-package com.minhnln.challenge03.commands.rules;
+package com.minhnln.challenge03.commands.receiver.rules.concretecommand;
 
 import com.minhnln.challenge03.commands.Command;
+import com.minhnln.challenge03.commands.receiver.rules.RuleCommands;
 
 public class RuleCreateDefault implements Command {
 

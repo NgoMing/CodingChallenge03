@@ -1,13 +1,13 @@
 package com.minhnln.challenge03;
 
 import com.minhnln.challenge03.cli.CommandLineParser;
-import com.minhnln.challenge03.commands.UserCommand;
+import com.minhnln.challenge03.commands.invoker.UserCommand;
 import com.minhnln.challenge03.model.PhoneNumberConverter;
 import com.minhnln.challenge03.utils.ConsoleSignal;
 import com.minhnln.challenge03.utils.StringAsker;
 
 import java.io.PrintStream;
-import java.util.Arrays;
+import java.io.UnsupportedEncodingException;
 
 /**
  * The application of Phone Number Converter
@@ -85,7 +85,17 @@ public class PhoneNumberConverterApplication {
 
             // others commands
             else {
-                userCommand.setCommand(CommandLineParser.parse(commandLine));
+                try {
+                    userCommand.setCommand(CommandLineParser.parse(commandLine));
+                }
+                catch (UnsupportedOperationException uoe) {
+                    if (uoe.toString().contains(CommandLineParser.RULES_COMMAND_NOT_FOUND)) {
+                        System.out.println(uoe);
+                        showRulesCommand();
+                    }
+                    commandLine = asker.ask(consoleSignal.execute());
+                    continue;
+                }
                 userCommand.execute();
                 commandLine = asker.ask(consoleSignal.execute());
             }

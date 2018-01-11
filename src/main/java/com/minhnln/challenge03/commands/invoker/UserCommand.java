@@ -1,4 +1,6 @@
-package com.minhnln.challenge03.commands;
+package com.minhnln.challenge03.commands.invoker;
+
+import com.minhnln.challenge03.commands.Command;
 
 public class UserCommand {
     Command command;
