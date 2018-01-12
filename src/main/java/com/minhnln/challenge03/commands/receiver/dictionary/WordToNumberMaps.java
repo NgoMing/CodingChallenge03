@@ -3,6 +3,7 @@ package com.minhnln.challenge03.commands.receiver.dictionary;
 import com.minhnln.challenge03.commands.receiver.rules.DigitToLetterRules;
 import com.minhnln.challenge03.utils.FileUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Stack;
@@ -55,6 +56,15 @@ public class WordToNumberMaps {
 
     @Override
     public String toString() {
+
+        if (digitToLetterRules.isEmpty()) {
+            throw new NullPointerException("Rules have not been set up yet");
+        }
+        else if ((null == dictionaryMap) || (dictionaryMap.isEmpty())) {
+            throw new NullPointerException("Dictionary has not been ready yet");
+        }
+
+
         StringBuilder sb = new StringBuilder("");
 
         for (String word : dictionaryMap.keySet()) {
@@ -65,14 +75,14 @@ public class WordToNumberMaps {
         return sb.toString();
     }
 
-    /*
-     * convert word to number in String type
-     *
-     * @param word in upper case
-     *
-     * @return number in String type
-     * @return null if there was at least one letter which cannot be converted
-     */
+    /**
+      * convert word to number in String type
+      *
+      * @param word in upper case
+      *
+      * @return number in String type
+      * @return null if there was at least one letter which cannot be converted
+      */
     public String convert(String word) {
         StringBuilder numberString = new StringBuilder("");
 
@@ -92,11 +102,38 @@ public class WordToNumberMaps {
         return numberString.toString();
     }
 
-    public boolean isEmpty() {
-        return dictionaryMap.isEmpty();
+    /**
+     * find all the word which is transferred from the number starting at given phoneNumber
+     *
+     * @param phoneNumber
+     * @return converted word or null if can not find the any match
+     */
+    public ArrayList<String> findConvertedWordByNumberStartingIn(String phoneNumber) {
+
+        ArrayList<String> result = new ArrayList<>();
+
+        if (digitToLetterRules.isEmpty()) {
+            throw new NullPointerException("Rules have not been set up yet");
+        }
+        else if (dictionaryMap.isEmpty()) {
+            throw new NullPointerException("Dictionary has not been ready yet");
+        }
+
+        for (String word : dictionaryMap.keySet()) {
+            String number = dictionaryMap.get(word);
+            if (phoneNumber.startsWith(number)) {
+                result.add(word);
+            }
+        }
+
+        return result;
     }
 
     public boolean isRulesEmpty() {
         return digitToLetterRules.isEmpty();
+    }
+
+    public boolean isEmpty() {
+        return dictionaryMap.isEmpty();
     }
 }

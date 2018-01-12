@@ -31,9 +31,6 @@ public class RuleCommands {
     }
 
     public void view() {
-        if ((null == digitToLetterRules) || (digitToLetterRules.isEmpty())){
-            throw new NullPointerException("Rules have not been set up yet");
-        }
         System.out.println(digitToLetterRules);
     }
 

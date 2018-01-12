@@ -65,6 +65,10 @@ public class DigitToLetterRules {
 
     @Override
     public String toString() {
+        if ((null == dictionaryMap) || (dictionaryMap.isEmpty())){
+            throw new NullPointerException("Rules have not been set up yet");
+        }
+
         StringBuilder sb = new StringBuilder("");
 
         for (String digit : dictionaryMap.keySet()) {

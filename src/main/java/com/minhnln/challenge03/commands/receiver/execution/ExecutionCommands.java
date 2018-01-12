@@ -8,12 +8,12 @@ public class ExecutionCommands {
     private String inputString;
 
     public ExecutionCommands(String inputString) {
-        phoneNumberConverter = new PhoneNumberConverter();
+        phoneNumberConverter = PhoneNumberConverter.getInstance();
         this.inputString = inputString;
     }
 
     public ExecutionCommands() {
-        phoneNumberConverter = new PhoneNumberConverter();
+        phoneNumberConverter = PhoneNumberConverter.getInstance();
     }
 
     public void convertMultiplePhoneNumber() {
@@ -25,13 +25,6 @@ public class ExecutionCommands {
     }
 
     public void view() {
-        if (phoneNumberConverter.isRulesEmpty()) {
-            throw new NullPointerException("Rules have not been set up yet");
-        }
-        else if (phoneNumberConverter.isDictionaryEmpty()) {
-            throw new NullPointerException("Dictionary has not been ready yet");
-        }
-
         System.out.println(phoneNumberConverter);
     }
 }

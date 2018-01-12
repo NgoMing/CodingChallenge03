@@ -26,13 +26,6 @@ public class DictionaryCommands {
     }
 
     public void view() {
-        if (wordToNumberMaps.isRulesEmpty()) {
-            throw new NullPointerException("Rules have not been set up yet");
-        }
-        else if ((null == wordToNumberMaps) || (wordToNumberMaps.isEmpty())) {
-            throw new NullPointerException("Dictionary has not been ready yet");
-        }
-
         System.out.println(wordToNumberMaps);
     }
 }
