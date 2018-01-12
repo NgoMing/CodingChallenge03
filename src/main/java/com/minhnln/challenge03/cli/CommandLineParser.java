@@ -7,6 +7,9 @@ import com.minhnln.challenge03.commands.receiver.dictionary.concretecommand.Dict
 import com.minhnln.challenge03.commands.receiver.dictionary.concretecommand.DictList;
 import com.minhnln.challenge03.commands.receiver.dictionary.concretecommand.DictSetInFIle;
 import com.minhnln.challenge03.commands.receiver.dictionary.concretecommand.DictView;
+import com.minhnln.challenge03.commands.receiver.execution.ExecutionCommands;
+import com.minhnln.challenge03.commands.receiver.execution.concretecommand.ExecuteMultiplePhoneNumber;
+import com.minhnln.challenge03.commands.receiver.execution.concretecommand.ExecuteSinglePhoneNumber;
 import com.minhnln.challenge03.commands.receiver.rules.RuleCommands;
 import com.minhnln.challenge03.commands.receiver.rules.concretecommand.*;
 
@@ -79,13 +82,16 @@ public class CommandLineParser {
         }
         // parse execute commands
         else if (splitCommandLine[0].contains(PhoneNumberConverterApplication.EXECUTE_CMD)) {
-
+            if (splitCommandLine[1].contains(".txt")) {
+                return new ExecuteMultiplePhoneNumber(new ExecutionCommands(splitCommandLine[1]));
+            }
+            else {
+                return new ExecuteSinglePhoneNumber(new ExecutionCommands(splitCommandLine[1]));
+            }
         }
         // unknown command
         else {
             throw new UnsupportedOperationException(COMMAND_NOT_FOUND);
         }
-
-        return null;
     }
 }

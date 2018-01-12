@@ -2,16 +2,10 @@ package com.minhnln.challenge03;
 
 import com.minhnln.challenge03.cli.CommandLineParser;
 import com.minhnln.challenge03.commands.invoker.UserCommand;
-import com.minhnln.challenge03.model.PhoneNumberConverter;
 import com.minhnln.challenge03.utils.ConsoleSignal;
-import com.minhnln.challenge03.utils.FileUtil;
 import com.minhnln.challenge03.utils.StringAsker;
 
-import java.io.File;
 import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
-import java.net.URL;
-import java.util.Stack;
 
 /**
  * The application of Phone Number Converter
@@ -38,7 +32,7 @@ public class PhoneNumberConverterApplication {
         SHOW_CURRENT_DICTIONARY(DICTIONARY_CMD + " view"),
         SHOW_LIST_EXIST_DICTIONARIES(DICTIONARY_CMD + " list"),
         CONVERT_SINGLE_PHONE_NUMBER(EXECUTE_CMD + " [phone_number]"),
-        CONVERT_MULTIPLE_PHONE_NUMBER(EXECUTE_CMD + " [phone_number_file_name]"),
+        CONVERT_MULTIPLE_PHONE_NUMBER(EXECUTE_CMD + " [phoneNumberFileName.txt]"),
         HELP("-help"),
         QUIT("-quit");
 
@@ -70,7 +64,6 @@ public class PhoneNumberConverterApplication {
      * @param asker
      */
     public static void execute(StringAsker asker) {
-        PhoneNumberConverter phoneNumberConverter = new PhoneNumberConverter();
         ConsoleSignal consoleSignal = new ConsoleSignal();
         UserCommand userCommand = new UserCommand();
         boolean done = false;
