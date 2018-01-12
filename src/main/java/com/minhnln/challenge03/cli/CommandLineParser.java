@@ -10,6 +10,7 @@ import com.minhnln.challenge03.commands.receiver.dictionary.concretecommand.Dict
 import com.minhnln.challenge03.commands.receiver.execution.ExecutionCommands;
 import com.minhnln.challenge03.commands.receiver.execution.concretecommand.ExecuteMultiplePhoneNumber;
 import com.minhnln.challenge03.commands.receiver.execution.concretecommand.ExecuteSinglePhoneNumber;
+import com.minhnln.challenge03.commands.receiver.execution.concretecommand.ExecuteView;
 import com.minhnln.challenge03.commands.receiver.rules.RuleCommands;
 import com.minhnln.challenge03.commands.receiver.rules.concretecommand.*;
 
@@ -84,6 +85,9 @@ public class CommandLineParser {
         else if (splitCommandLine[0].contains(PhoneNumberConverterApplication.EXECUTE_CMD)) {
             if (splitCommandLine[1].contains(".txt")) {
                 return new ExecuteMultiplePhoneNumber(new ExecutionCommands(splitCommandLine[1]));
+            }
+            else if (splitCommandLine[1].equals("view")) {
+                return new ExecuteView(new ExecutionCommands());
             }
             else {
                 return new ExecuteSinglePhoneNumber(new ExecutionCommands(splitCommandLine[1]));
