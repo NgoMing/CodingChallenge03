@@ -1,4 +1,4 @@
-java.lang.NullPointerException: Rules has not set up yet
+java.lang.NullPointerException: Rules have not been set up yet
 	Create default rules:               -rules default
 	Set rules in exist file:            -rules [rulesFileName.txt]
 	Create a new rule:                  -rules [digit] [letter1] [letter2] ...

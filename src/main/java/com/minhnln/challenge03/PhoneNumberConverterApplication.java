@@ -4,10 +4,14 @@ import com.minhnln.challenge03.cli.CommandLineParser;
 import com.minhnln.challenge03.commands.invoker.UserCommand;
 import com.minhnln.challenge03.model.PhoneNumberConverter;
 import com.minhnln.challenge03.utils.ConsoleSignal;
+import com.minhnln.challenge03.utils.FileUtil;
 import com.minhnln.challenge03.utils.StringAsker;
 
+import java.io.File;
 import java.io.PrintStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.util.Stack;
 
 /**
  * The application of Phone Number Converter
@@ -31,6 +35,7 @@ public class PhoneNumberConverterApplication {
         SHOW_LIST_EXIST_RULES(RULE_CMD + " list"),
         SET_DEFAULT_DICTIONARY(DICTIONARY_CMD + " default"),
         SET_DICTIONARY(DICTIONARY_CMD + " [dictionaryFileName.txt]"),
+        SHOW_CURRENT_DICTIONARY(DICTIONARY_CMD + " view"),
         SHOW_LIST_EXIST_DICTIONARIES(DICTIONARY_CMD + " list"),
         CONVERT_SINGLE_PHONE_NUMBER(EXECUTE_CMD + " [phone_number]"),
         CONVERT_MULTIPLE_PHONE_NUMBER(EXECUTE_CMD + " [phone_number_file_name]"),
@@ -54,6 +59,7 @@ public class PhoneNumberConverterApplication {
      * @param args
      */
     public static void main(String[] args) {
+
         execute(new StringAsker(System.in, System.out));
     }
 
@@ -102,7 +108,10 @@ public class PhoneNumberConverterApplication {
                 }
                 catch (NullPointerException npe) {
                     System.out.println(npe);
-                    showRulesCommand();
+                    if (npe.toString().contains("Rules"))
+                        showRulesCommand();
+                    else if (npe.toString().contains(("Dictionary")))
+                        showDictionaryCommand();
                 }
 
                 commandLine = asker.ask(consoleSignal.execute());
@@ -165,6 +174,7 @@ public class PhoneNumberConverterApplication {
 
         out.println("\tSet default dictionary:                    " + COMMAND.SET_DEFAULT_DICTIONARY);
         out.println("\tSet dictionary:                            " + COMMAND.SET_DICTIONARY);
+        out.println("\tShow current dictionary(Optional):         " + COMMAND.SHOW_CURRENT_DICTIONARY);
         out.println("\tShow list of exist dictionaries(Optional): " + COMMAND.SHOW_LIST_EXIST_DICTIONARIES);
     }
 

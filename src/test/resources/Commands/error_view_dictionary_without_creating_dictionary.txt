@@ -1,0 +1,5 @@
+java.lang.NullPointerException: Dictionary has not been ready yet
+	Set default dictionary:                    -dict default
+	Set dictionary:                            -dict [dictionaryFileName.txt]
+	Show current dictionary(Optional):         -dict view
+	Show list of exist dictionaries(Optional): -dict list

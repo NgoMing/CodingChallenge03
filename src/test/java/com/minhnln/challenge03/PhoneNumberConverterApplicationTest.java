@@ -1,6 +1,6 @@
 package com.minhnln.challenge03;
 
-import com.minhnln.challenge03.commands.receiver.rules.WordToNumberRules;
+import com.minhnln.challenge03.commands.receiver.rules.DigitToLetterRules;
 import com.minhnln.challenge03.utils.ConsoleSignal;
 import com.minhnln.challenge03.utils.FileUtil;
 import com.minhnln.challenge03.utils.StringAsker;
@@ -108,14 +108,39 @@ public class PhoneNumberConverterApplicationTest {
     }
 
     @Test
-    public void _viewWithoutCreatingRules() throws Exception {
+    public void __viewRulesWithoutCreatingRules() throws Exception {
         when(asker.ask(consoleSignal.execute())).thenReturn("-rules view");
         when(asker.ask(consoleSignal.execute())).thenReturn("-quit");
         PhoneNumberConverterApplication.execute(asker);
 
         final String outContentString = outContent.toString(CHARSET_NAME);
         assertThat(outContentString).contains(
-                new FileUtil().getContentFromClasspath("Commands/error_view_without_creating_rules.txt")
+                new FileUtil().getContentFromClasspath("Commands/error_view_rules_without_creating_rules.txt")
+        );
+    }
+
+    @Test
+    public void __viewDictionaryWithoutCreatingRules() throws Exception {
+        when(asker.ask(consoleSignal.execute())).thenReturn("-dict view");
+        when(asker.ask(consoleSignal.execute())).thenReturn("-quit");
+        PhoneNumberConverterApplication.execute(asker);
+
+        final String outContentString = outContent.toString(CHARSET_NAME);
+        assertThat(outContentString).contains(
+                new FileUtil().getContentFromClasspath("Commands/error_view_dictionary_without_creating_rules.txt")
+        );
+    }
+
+    @Test
+    public void _viewDictionaryWithoutCreatingDictionary() throws Exception {
+        when(asker.ask(consoleSignal.execute())).thenReturn("-rules default");
+        when(asker.ask(consoleSignal.execute())).thenReturn("-dict view");
+        when(asker.ask(consoleSignal.execute())).thenReturn("-quit");
+        PhoneNumberConverterApplication.execute(asker);
+
+        final String outContentString = outContent.toString(CHARSET_NAME);
+        assertThat(outContentString).contains(
+                new FileUtil().getContentFromClasspath("Commands/error_view_dictionary_without_creating_dictionary.txt")
         );
     }
 
@@ -127,7 +152,7 @@ public class PhoneNumberConverterApplicationTest {
         PhoneNumberConverterApplication.execute(asker);
 
         final String outContentString = outContent.toString(CHARSET_NAME);
-        assertThat(outContentString).contains(WordToNumberRules.CREATE_IN_FILE + fileName);
+        assertThat(outContentString).contains(DigitToLetterRules.CREATE_IN_FILE + fileName);
     }
 
     @Test
@@ -138,7 +163,7 @@ public class PhoneNumberConverterApplicationTest {
         PhoneNumberConverterApplication.execute(asker);
 
         final String outContentString = outContent.toString(CHARSET_NAME);
-        assertThat(outContentString).contains(WordToNumberRules.SAVE_IN_FILE + fileName);
+        assertThat(outContentString).contains(DigitToLetterRules.SAVE_IN_FILE + fileName);
     }
 
     @Test
@@ -148,7 +173,7 @@ public class PhoneNumberConverterApplicationTest {
         PhoneNumberConverterApplication.execute(asker);
 
         final String outContentString = outContent.toString(CHARSET_NAME);
-        assertThat(outContentString).contains(WordToNumberRules.VERIFY_RULES);
+        assertThat(outContentString).contains(DigitToLetterRules.VERIFY_RULES);
     }
 
     @Test
@@ -158,7 +183,7 @@ public class PhoneNumberConverterApplicationTest {
         PhoneNumberConverterApplication.execute(asker);
 
         final String outContentString = outContent.toString(CHARSET_NAME);
-        assertThat(outContentString).contains(WordToNumberRules.LIST_RULES);
+        assertThat(outContentString).contains(DigitToLetterRules.LIST_RULES);
     }
 
     @Test
@@ -170,6 +195,21 @@ public class PhoneNumberConverterApplicationTest {
         final String outContentString = outContent.toString(CHARSET_NAME);
         assertThat(outContentString).contains(
                 new FileUtil().getContentFromClasspath("Commands/error_rules_command.txt")
+        );
+    }
+
+    @Test
+    public void createDefaultDictionary() throws Exception {
+        when(asker.ask(consoleSignal.execute())).thenReturn("-rules default");
+        when(asker.ask(consoleSignal.execute())).thenReturn("-dict default");
+        when(asker.ask(consoleSignal.execute())).thenReturn("-dict view");
+        when(asker.ask(consoleSignal.execute())).thenReturn("-quit");
+
+        PhoneNumberConverterApplication.execute(asker);
+
+        final String outContentString = outContent.toString(CHARSET_NAME);
+        assertThat(outContentString).contains(
+                new FileUtil().getContentFromClasspath("Dictionaries/default_converted_dictionary.txt")
         );
     }
 }

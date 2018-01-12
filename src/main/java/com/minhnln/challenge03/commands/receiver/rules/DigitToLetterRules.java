@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class WordToNumberRules {
+public class DigitToLetterRules {
     /**
      * Static string for test incomplete methods
      */
@@ -14,11 +14,11 @@ public class WordToNumberRules {
     public static final String LIST_RULES = "List all the existing rules:";
 
 
-    private static WordToNumberRules uniqueWordToNumberRules;
+    private static DigitToLetterRules uniqueDigitToLetterRules;
 
-    Map<String, ArrayList<String>> dictionaryMap;
+    private Map<String, ArrayList<String>> dictionaryMap;
 
-    private WordToNumberRules() {
+    private DigitToLetterRules() {
         dictionaryMap = new HashMap<>();
     }
 
@@ -26,12 +26,12 @@ public class WordToNumberRules {
         return dictionaryMap.isEmpty();
     }
 
-    public static WordToNumberRules getInstance() {
-        if (uniqueWordToNumberRules == null) {
-            uniqueWordToNumberRules = new WordToNumberRules();
+    public static DigitToLetterRules getInstance() {
+        if (uniqueDigitToLetterRules == null) {
+            uniqueDigitToLetterRules = new DigitToLetterRules();
         }
 
-        return uniqueWordToNumberRules;
+        return uniqueDigitToLetterRules;
     }
 
     /*
@@ -93,5 +93,21 @@ public class WordToNumberRules {
 
     public void list() {
         System.out.println(LIST_RULES);
+    }
+
+    /*
+     * convert Letter to Digit in String type
+     *
+     * @param letter in upper case
+     *
+     * @return digit in String type
+     */
+    public String convert(char letter) {
+        for (String numberKey : dictionaryMap.keySet()) {
+            if (dictionaryMap.get(numberKey).contains(String.valueOf(letter).toUpperCase()))
+                return numberKey;
+        }
+
+        return null;
     }
 }

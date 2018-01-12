@@ -2,6 +2,11 @@ package com.minhnln.challenge03.cli;
 
 import com.minhnln.challenge03.PhoneNumberConverterApplication;
 import com.minhnln.challenge03.commands.Command;
+import com.minhnln.challenge03.commands.receiver.dictionary.DictionaryCommands;
+import com.minhnln.challenge03.commands.receiver.dictionary.concretecommand.DictCreateDefault;
+import com.minhnln.challenge03.commands.receiver.dictionary.concretecommand.DictList;
+import com.minhnln.challenge03.commands.receiver.dictionary.concretecommand.DictSetInFIle;
+import com.minhnln.challenge03.commands.receiver.dictionary.concretecommand.DictView;
 import com.minhnln.challenge03.commands.receiver.rules.RuleCommands;
 import com.minhnln.challenge03.commands.receiver.rules.concretecommand.*;
 
@@ -56,7 +61,21 @@ public class CommandLineParser {
         }
         // parse dictionary commands
         else if (splitCommandLine[0].contains(PhoneNumberConverterApplication.DICTIONARY_CMD)) {
-
+            if (splitCommandLine[1].equals("default")) {
+                return new DictCreateDefault(new DictionaryCommands());
+            }
+            else if (splitCommandLine[1].contains(".txt")) {
+                return new DictSetInFIle(new DictionaryCommands(splitCommandLine[1]));
+            }
+            else if (splitCommandLine[1].equals("view")) {
+                return new DictView(new DictionaryCommands());
+            }
+            else if (splitCommandLine[1].equals("list")) {
+                return new DictList(new DictionaryCommands());
+            }
+            else {
+                throw new UnsupportedOperationException(DICTIONARY_COMMAND_NOT_FOUND);
+            }
         }
         // parse execute commands
         else if (splitCommandLine[0].contains(PhoneNumberConverterApplication.EXECUTE_CMD)) {

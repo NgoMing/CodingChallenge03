@@ -1,0 +1,8 @@
+java.lang.NullPointerException: Rules have not been set up yet
+	Create default rules:               -rules default
+	Set rules in exist file:            -rules [rulesFileName.txt]
+	Create a new rule:                  -rules [digit] [letter1] [letter2] ...
+	Save rules in file(Optional):       -rules save [ruleFileName.txt]
+	Verify current rules(Optional):     -rules verify
+	Show current rules(Optional):       -rules view
+	Show list of exist rules(Optional): -rules list

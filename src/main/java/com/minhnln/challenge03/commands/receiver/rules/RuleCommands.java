@@ -2,54 +2,54 @@ package com.minhnln.challenge03.commands.receiver.rules;
 
 public class RuleCommands {
 
-    private WordToNumberRules wordToNumberRules;
+    private DigitToLetterRules digitToLetterRules;
     private String number;
     private String[] digits;
     private String fileName;
 
     public RuleCommands() {
-        wordToNumberRules = WordToNumberRules.getInstance();
+        digitToLetterRules = DigitToLetterRules.getInstance();
     }
 
     public RuleCommands(String number, String[] digits) {
-        wordToNumberRules = WordToNumberRules.getInstance();
+        digitToLetterRules = DigitToLetterRules.getInstance();
         this.number = number;
         this.digits = digits;
     }
 
     public RuleCommands(String fileName) {
-        wordToNumberRules = WordToNumberRules.getInstance();
+        digitToLetterRules = DigitToLetterRules.getInstance();
         this.fileName = fileName;
     }
 
     public void createDefault() {
-        wordToNumberRules.createDefault();
+        digitToLetterRules.createDefault();
     }
 
     public void createNew() {
-        wordToNumberRules.createNew(number, digits);
+        digitToLetterRules.createNew(number, digits);
     }
 
     public void view() {
-        if ((null == wordToNumberRules) || (wordToNumberRules.isEmpty())){
-            throw new NullPointerException("Rules has not set up yet");
+        if ((null == digitToLetterRules) || (digitToLetterRules.isEmpty())){
+            throw new NullPointerException("Rules have not been set up yet");
         }
-        System.out.println(wordToNumberRules);
+        System.out.println(digitToLetterRules);
     }
 
     public void setInFile() {
-        wordToNumberRules.createInFile(fileName);
+        digitToLetterRules.createInFile(fileName);
     }
 
     public void save() {
-        wordToNumberRules.save(fileName);
+        digitToLetterRules.save(fileName);
     }
 
     public void verify() {
-        wordToNumberRules.verify();
+        digitToLetterRules.verify();
     }
 
     public void list() {
-        wordToNumberRules.list();
+        digitToLetterRules.list();
     }
 }
