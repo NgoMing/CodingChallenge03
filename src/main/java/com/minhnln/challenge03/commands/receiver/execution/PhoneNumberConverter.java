@@ -68,6 +68,7 @@ public class PhoneNumberConverter {
             sb.setLength(sb.length() - 2);
             sb.append("\n");
         }
+        sb.setLength(sb.length() - 1);
 
         return sb.toString();
     }

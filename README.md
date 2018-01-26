@@ -20,6 +20,7 @@ Requirements:
 * Users can create a new one: `-rules [digit] [letter1] [letter2] ...`
 * But they also can use the default rules: `-rules default`
 ###### Default rules
+```
 * 2 => A, B, C
 * 3 => D, E, F
 * 4 => G, H, I
@@ -28,7 +29,7 @@ Requirements:
 * 7 => P, Q, R, S
 * 8 => T, U, V
 * 9 => W, X, Y, Z
-
+```
 #### Identify dictionary file - which will store all the possible words.
 * Users can choose their own file by move the file to Resource folder: `-dict [dictionaryFileName.txt]`
 * Or they can also use the default file: `-dict default`
@@ -93,96 +94,127 @@ Including all the mentioned commands.
 ### Build and Test
 
 Windows:
-...
-...
+```
+gradlew clean build
+```
 
 ### Run
 
 Windows
-...
-...
-
+```
+java -jar build/libs/challenge03-1.0-SNAPSHOT.jar
+```
 ## Test cases
 #### Cases related to `-rules` commands
 1. Creating default rules
-* `-rules default`
-* `-rules view`
+```
+* -rules default
+* -rules view
 * expected: default_rules.txt
+```
 
 2. Creating a new rule
-* `-rules [digit] [letter1] [letter2] ...`
-* `-rules view`
+```
+* -rules [digit] [letter1] [letter2] ...
+* -rules view
 * using JUnitParameter test compile
+```
 
 3. Viewing rules without creating rules
-* `-rules view`
+```
+* -rules view
 * expected error_view_without_rules.txt 
-(`rules have not been set up yet and show rules command list`)
+(rules have not been set up yet and show rules command list)
+```
 
 4. Wrong rules command
-* `-rules abc`
+```
+* -rules abc
 * expected error_rules_command.txt 
-(`rules command not found and show rules command list`)
+(rules command not found and show rules command list)
+```
 
 #### Cases related to `-dict` commands
 5. Creating default dictionary with rules
-* `-rules default`
-* `-dict default` (using default_dictionary.txt)
-* `-dict view`
+```
+* -rules default
+* -dict default (using default_dictionary.txt)
+* -dict view
 * expected default_converted_dictionary.txt
+```
 
 6. Creating default dictionary without rules
-* `-dict default` (using default_dictionary.txt)
-* `-dict view`
+```
+* -dict default (using default_dictionary.txt)
+* -dict view
 * expected error_view_without_rules.txt 
 (`rules have not been set up yet and show rules command list`)
+```
 
 7. Viewing dictionary with rules but dictionary
-* `-rules default`
-* `-dict view`
+```
+* -rules default
+* -dict view
 * expected error_view_without_dictionary.txt 
-(`dictionary has not been ready yet and show dictionary command list`)
+(dictionary has not been ready yet and show dictionary command list)
+```
 
 8. Viewing dictionary without rules and dictionary
-* `-dict view`
+```
+* -dict view
 * expected error_view_without_rules.txt 
-(`rules have not been set up yet and show rules command list`)
+(rules have not been set up yet and show rules command list)
+```
 
 #### Cases related to `-exe` commands
 9. Convert single phone number with rules and dictionary
-* `-rules default`
-* `-dict default`
-* `-exe 225563`
+```
+* -rules default
+* -dict default
+* -exe 225563
 * expected CALL-ME, BALL-ME
+```
 
 10. Convert single phone number with rules but dictionary
-* `-rules default`
-* `-exe 225563`
+```
+* -rules default
+* -exe 225563
 * expected error_view_without_dictionary.txt 
-(`dictionary has not been ready yet and show dictionary command list`)
+(dictionary has not been ready yet and show dictionary command list)
+```
 
 11. Convert single phone number without rules and dictionary
-* `-exe 225563`
+```
+* -exe 225563
 * expected error_view_without_rules.txt 
-(`rules have not been set up yet and show rules command list`)
+(rules have not been set up yet and show rules command list)
+```
 
 12. Convert multiple phone numbers with rules and dictionary
-* `-rules default`
-* `-dict default`
-* `-exe phone_number_default.txt`
-* expected 
+```
+* -rules default
+* -dict default
+* -exe phone_number_default.txt
+* expected
+```
 
 13. Convert multiple phone numbers with rules but dictionary
-* `-rules default`
-* `-exe phone_number_default.txt`
+```
+* -rules default
+* -exe phone_number_default.txt
 * expected error_view_without_dictionary.txt 
-(`dictionary has not been ready yet and show dictionary command list`)
+(dictionary has not been ready yet and show dictionary command list)
+```
 
 14. Convert multiple phone numbers without rules and dictionary
-* `-exe phone_number_default.txt`
+```
+* -exe phone_number_default.txt
 * expected error_view_without_rules.txt 
-(`rules have not been set up yet and show rules command list`)
+(rules have not been set up yet and show rules command list)
+```
 
 15. Viewing phone number without rules or dictionary or both
-* `-exe view`
+```
+* -exe view
 * expected "There is not any result"
+```

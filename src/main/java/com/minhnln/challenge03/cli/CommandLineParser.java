@@ -40,7 +40,10 @@ public class CommandLineParser {
                 return new RuleCreateNew(new RuleCommands(number, digits));
             }
             else {
-                if (splitCommandLine[1].equals("default")) {
+                if (splitCommandLine.length < 2) {
+                    throw new UnsupportedOperationException(RULES_COMMAND_NOT_FOUND);
+                }
+                else if (splitCommandLine[1].equals("default")) {
                     return new RuleCreateDefault(new RuleCommands());
                 }
                 else if (splitCommandLine[1].equals("view")) {
@@ -65,7 +68,10 @@ public class CommandLineParser {
         }
         // parse dictionary commands
         else if (splitCommandLine[0].contains(PhoneNumberConverterApplication.DICTIONARY_CMD)) {
-            if (splitCommandLine[1].equals("default")) {
+            if (splitCommandLine.length < 2) {
+                throw new UnsupportedOperationException(DICTIONARY_COMMAND_NOT_FOUND);
+            }
+            else if (splitCommandLine[1].equals("default")) {
                 return new DictCreateDefault(new DictionaryCommands());
             }
             else if (splitCommandLine[1].contains(".txt")) {
@@ -83,7 +89,10 @@ public class CommandLineParser {
         }
         // parse execute commands
         else if (splitCommandLine[0].contains(PhoneNumberConverterApplication.EXECUTE_CMD)) {
-            if (splitCommandLine[1].contains(".txt")) {
+            if (splitCommandLine.length < 2) {
+                throw new UnsupportedOperationException(EXECUTE_COMMAND_NOT_FOUND);
+            }
+            else if (splitCommandLine[1].contains(".txt")) {
                 return new ExecuteMultiplePhoneNumber(new ExecutionCommands(splitCommandLine[1]));
             }
             else if (splitCommandLine[1].equals("view")) {

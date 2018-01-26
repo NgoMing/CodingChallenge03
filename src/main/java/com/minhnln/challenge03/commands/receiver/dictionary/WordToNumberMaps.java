@@ -3,10 +3,8 @@ package com.minhnln.challenge03.commands.receiver.dictionary;
 import com.minhnln.challenge03.commands.receiver.rules.DigitToLetterRules;
 import com.minhnln.challenge03.utils.FileUtil;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.net.URISyntaxException;
+import java.util.*;
 
 public class WordToNumberMaps {
 

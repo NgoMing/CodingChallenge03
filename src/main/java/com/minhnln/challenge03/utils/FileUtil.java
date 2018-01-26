@@ -1,12 +1,19 @@
 package com.minhnln.challenge03.utils;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
-import java.util.Scanner;
-import java.util.Stack;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * FileUtil class
@@ -34,23 +41,21 @@ public class FileUtil {
      * @return stack of words in file
      */
     public Stack<String> readResourceFile(String fileName) {
+
         Stack<String> result = new Stack<>();
 
-        File dictionaryFile = new File(getClass().getClassLoader().getResource(fileName).getFile());
-        if (!dictionaryFile.exists()) {
-            System.out.println("Your file has the wrong name or is in the wrong directory");
-            return null;
-        }
-
-        try (Scanner scanner = new Scanner(dictionaryFile)) {
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
+        URL url = getClass().getClassLoader().getResource(fileName);
+        try {
+            BufferedReader br = new BufferedReader(
+                    new InputStreamReader(url.openStream()));
+            String line;
+            while ((line = br.readLine()) != null) {
                 result.push(line);
             }
+            br.close();
 
-            scanner.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            result = null;
         }
 
         return result;

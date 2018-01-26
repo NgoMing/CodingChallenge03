@@ -33,6 +33,7 @@ public class PhoneNumberConverterApplication {
         SHOW_LIST_EXIST_DICTIONARIES(DICTIONARY_CMD + " list"),
         CONVERT_SINGLE_PHONE_NUMBER(EXECUTE_CMD + " [phone_number]"),
         CONVERT_MULTIPLE_PHONE_NUMBER(EXECUTE_CMD + " [phoneNumberFileName.txt]"),
+        SHOW_RESULTS(EXECUTE_CMD + " view"),
         HELP("-help"),
         QUIT("-quit");
 
@@ -53,7 +54,7 @@ public class PhoneNumberConverterApplication {
      * @param args
      */
     public static void main(String[] args) {
-
+        printInstruction();
         execute(new StringAsker(System.in, System.out));
     }
 
@@ -77,7 +78,7 @@ public class PhoneNumberConverterApplication {
                 commandLine = asker.ask(consoleSignal.execute());
             }
 
-            // quit command
+            // -quit command
             else if (commandLine.equals(COMMAND.QUIT.toString())) {
                 done = true;
             }
@@ -88,9 +89,15 @@ public class PhoneNumberConverterApplication {
                     userCommand.setCommand(CommandLineParser.parse(commandLine));
                 }
                 catch (UnsupportedOperationException uoe) {
+                    System.out.println(uoe);
                     if (uoe.toString().contains(CommandLineParser.RULES_COMMAND_NOT_FOUND)) {
-                        System.out.println(uoe);
                         showRulesCommand();
+                    }
+                    else if (uoe.toString().contains(CommandLineParser.DICTIONARY_COMMAND_NOT_FOUND)) {
+                        showDictionaryCommand();
+                    }
+                    else if (uoe.toString().contains(CommandLineParser.COMMAND_NOT_FOUND)) {
+                        System.out.println("If you want to list all the commands, type " + COMMAND.HELP);
                     }
                     commandLine = asker.ask(consoleSignal.execute());
                     continue;
@@ -126,6 +133,8 @@ public class PhoneNumberConverterApplication {
         showDictionaryCommand();
         out.println("Step 3: convert single or multiple phone numbers");
         showExecuteCommand();
+        out.println("Step 4: show the result");
+        out.println("\tShow the result after converting: " + COMMAND.SHOW_RESULTS);
         out.println("If you want to list all the commands, type " + COMMAND.HELP);
         out.println("If you want to quit the program, type " + COMMAND.QUIT);
     }
@@ -177,7 +186,8 @@ public class PhoneNumberConverterApplication {
     private static void showExecuteCommand() {
         final PrintStream out = System.out;
 
-        out.println("\tConvert single phone number:   " + COMMAND.CONVERT_SINGLE_PHONE_NUMBER);
-        out.println("\tConvert multiple phone number: " + COMMAND.CONVERT_MULTIPLE_PHONE_NUMBER);
+        out.println("\tConvert single phone number:       " + COMMAND.CONVERT_SINGLE_PHONE_NUMBER);
+        out.println("\tConvert multiple phone number:     " + COMMAND.CONVERT_MULTIPLE_PHONE_NUMBER);
+        out.println("\tShow the results after converting: " + COMMAND.SHOW_RESULTS);
     }
 }
