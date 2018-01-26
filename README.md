@@ -95,7 +95,7 @@ Including all the mentioned commands.
 
 Windows:
 ```
-gradlew clean build
+./gradlew clean build
 ```
 
 ### Run
