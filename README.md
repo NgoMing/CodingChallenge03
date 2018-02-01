@@ -64,6 +64,14 @@ Show the list of exist rules in Resource folder.
 ##### `-dict list`
 Show the list of exist dictionaries in Resource folder.
 
+#### Support multiple command lines
+```
+-rules default -rules view  : set defaut rules and view
+-dict default -dict view    : set default dictionary and view
+-exe 225563 -exe view       : convert 225563 and view
+-rules default -dict default -exe 225563 -exe view : set default rules, dictionary, convert 225563 and view result
+```
+
 ## Solution Design
 
 ### Using command pattern to manipulate user commands
@@ -76,7 +84,7 @@ Show the list of exist dictionaries in Resource folder.
 ##### Concrete Commands
 Including all the mentioned commands.
 ### Using singleton pattern for map instance
-* Prevent undesired editing outside class and
+* Prevent undesired editing outside class
 * Guarantee that the maps are unique through the related commands
 * Including maps for: digit to letter rules, word to number, and phone number to words (separated by "-")
 
