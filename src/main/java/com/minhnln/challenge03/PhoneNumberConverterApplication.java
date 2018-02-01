@@ -6,6 +6,7 @@ import com.minhnln.challenge03.utils.ConsoleSignal;
 import com.minhnln.challenge03.utils.StringAsker;
 
 import java.io.PrintStream;
+import java.util.Queue;
 
 /**
  * The application of Phone Number Converter
@@ -85,35 +86,32 @@ public class PhoneNumberConverterApplication {
 
             // others commands
             else {
-                try {
-                    userCommand.setCommand(CommandLineParser.parse(commandLine));
-                }
-                catch (UnsupportedOperationException uoe) {
-                    System.out.println(uoe);
-                    if (uoe.toString().contains(CommandLineParser.RULES_COMMAND_NOT_FOUND)) {
-                        showRulesCommand();
+                Queue<String> queueCommandLine = CommandLineParser.parseMultipleUserCommandLines(commandLine);
+                while (queueCommandLine.peek() != null) {
+                    try {
+                        userCommand.setCommand(CommandLineParser.parseSingleUserCommandLine(queueCommandLine.poll()));
+                    } catch (UnsupportedOperationException uoe) {
+                        System.out.println(uoe);
+                        if (uoe.toString().contains(CommandLineParser.RULES_COMMAND_NOT_FOUND)) {
+                            showRulesCommand();
+                        } else if (uoe.toString().contains(CommandLineParser.DICTIONARY_COMMAND_NOT_FOUND)) {
+                            showDictionaryCommand();
+                        } else if (uoe.toString().contains(CommandLineParser.COMMAND_NOT_FOUND)) {
+                            System.out.println("If you want to list all the commands, type " + COMMAND.HELP);
+                        }
+                        continue;
                     }
-                    else if (uoe.toString().contains(CommandLineParser.DICTIONARY_COMMAND_NOT_FOUND)) {
-                        showDictionaryCommand();
-                    }
-                    else if (uoe.toString().contains(CommandLineParser.COMMAND_NOT_FOUND)) {
-                        System.out.println("If you want to list all the commands, type " + COMMAND.HELP);
-                    }
-                    commandLine = asker.ask(consoleSignal.execute());
-                    continue;
-                }
 
-                try {
-                    userCommand.execute();
+                    try {
+                        userCommand.execute();
+                    } catch (NullPointerException npe) {
+                        System.out.println(npe);
+                        if (npe.toString().contains("Rules"))
+                            showRulesCommand();
+                        else if (npe.toString().contains(("Dictionary")))
+                            showDictionaryCommand();
+                    }
                 }
-                catch (NullPointerException npe) {
-                    System.out.println(npe);
-                    if (npe.toString().contains("Rules"))
-                        showRulesCommand();
-                    else if (npe.toString().contains(("Dictionary")))
-                        showDictionaryCommand();
-                }
-
                 commandLine = asker.ask(consoleSignal.execute());
             }
         }

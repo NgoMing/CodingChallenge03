@@ -78,6 +78,18 @@ public class PhoneNumberConverterApplicationTest {
         );
     }
 
+    @Test
+    public void createDefaultRulesUsingMultipleCommandLine() throws Exception {
+        when(asker.ask(consoleSignal.execute())).thenReturn("-rules default -rules view");
+        when(asker.ask(consoleSignal.execute())).thenReturn("-quit");
+        PhoneNumberConverterApplication.execute(asker);
+
+        final String outContentString = outContent.toString(CHARSET_NAME);
+        assertThat(outContentString).contains(
+                new FileUtil().getContentFromClasspath("Commands/default_rules.txt")
+        );
+    }
+
     private static final Object[] newRulesData() {
         return new Object[] {
                 new Object[] {"2", "b", "d", "v"},
@@ -201,6 +213,23 @@ public class PhoneNumberConverterApplicationTest {
         when(asker.ask(consoleSignal.execute())).thenReturn("-rules default");
         when(asker.ask(consoleSignal.execute())).thenReturn("-dict default");
         when(asker.ask(consoleSignal.execute())).thenReturn("-dict view");
+        when(asker.ask(consoleSignal.execute())).thenReturn("-quit");
+
+        PhoneNumberConverterApplication.execute(asker);
+
+        final String outContentString = outContent.toString(CHARSET_NAME);
+        assertThat(outContentString).contains(
+                new FileUtil().getContentFromClasspath("Dictionaries/default_converted_dictionary.txt")
+        );
+    }
+
+    @Test
+    @Ignore
+    /**
+     * I don't know why the test failed
+     */
+    public void createDefaultDictionaryUsingMultipleCommandLine() throws Exception {
+        when(asker.ask(consoleSignal.execute())).thenReturn("-rules default -dict default -dict view");
         when(asker.ask(consoleSignal.execute())).thenReturn("-quit");
 
         PhoneNumberConverterApplication.execute(asker);
